@@ -7,11 +7,12 @@ import android.graphics.PointF
  * Created on 15.12.2018.
  * @author dhabensky <dhabensky@yandex.ru>
  */
-class GameObject {
+open class GameObject {
 
+	var speed = PointF()
 	var pos = PointF()
 
-	fun render(canvas: Canvas) {
+	open fun render(canvas: Canvas) {
 
 	}
 
