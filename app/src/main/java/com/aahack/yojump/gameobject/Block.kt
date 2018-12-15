@@ -9,8 +9,8 @@ import android.graphics.RectF
 class Block : SpriteObject() {
 
 	override fun getBounds(outRect: RectF) {
-		val l = (pos.x - w / 2)
-		val t = (pos.y - h / 2)
+		val l = pos.x
+		val t = pos.y
 		outRect.set(l, t, l + w, t + h)
 	}
 

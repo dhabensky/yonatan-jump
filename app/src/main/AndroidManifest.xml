@@ -18,8 +18,8 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
+
         <activity android:name=".DhabenskyActivity"
                   android:screenOrientation="landscape">
             <intent-filter>
@@ -27,6 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".GameOverActivity"
+                  android:screenOrientation="landscape"/>
+
     </application>
 
 </manifest>

@@ -57,7 +57,7 @@ class Scene {
 			if (playerBoundsCopy.intersect(bounds)) {
 				val inside = playerBounds.bottom - bounds.top
 				if (player.velocity.y > 0 && inside < threshold) {
-					player.pos.y = bounds.top - player.h / 2
+					player.pos.y = bounds.top - player.h
 					player.velocity.y = 0f
 				}
 			}

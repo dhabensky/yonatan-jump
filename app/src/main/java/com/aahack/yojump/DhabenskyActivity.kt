@@ -1,9 +1,11 @@
 package com.aahack.yojump
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.Display
 import android.view.Window
@@ -13,6 +15,7 @@ import com.aahack.yojump.gameobject.Block
 import com.aahack.yojump.gameobject.Camera
 import com.aahack.yojump.gameobject.Player
 import com.aahack.yojump.gameobject.Scene
+import com.aahack.yojump.input.PlayerController
 import com.aahack.yojump.util.AnimationFrame
 import kotlinx.android.synthetic.main.dhabensky_activity.*
 
@@ -43,6 +46,15 @@ class DhabenskyActivity : AppCompatActivity() {
 		scene.setPlayer(player)
 		scene.setCamera(camera)
 		scene.addObject(block)
+
+		val controller = PlayerController()
+		controller.player = player
+		gameView.setOnClickListener(controller)
+
+		// gameover timeout
+//		Handler().postDelayed( {
+//			startActivity(Intent(this, GameOverActivity::class.java))
+//		}, 4000)
 	}
 
 	private fun createPlayerFrames(): List<AnimationFrame> {
@@ -74,9 +86,9 @@ class DhabenskyActivity : AppCompatActivity() {
 	private fun createBlock(): Block {
 		val block = Block()
 		block.drawable = ColorDrawable(Color.BLACK)
-		block.w = 300
+		block.w = 1800
 		block.h = 20
-		block.pos.set(0f, 150f)
+		block.pos.set(0f, 700f)
 		block.tag = "block"
 		return block
 	}

@@ -28,8 +28,8 @@ public class Player extends GameObject implements JumpListener {
 
 		switchFrames();
 
-		int l = (int) (getPos().x - w / 2);
-		int t = (int) (getPos().y - h / 2);
+		int l = (int) (getPos().x);
+		int t = (int) (getPos().y);
 
 		drawable.setBounds(l, t, l + w, t + h);
 		drawable.draw(canvas);
@@ -55,14 +55,14 @@ public class Player extends GameObject implements JumpListener {
 
 	@Override
 	public void getBounds(@NotNull RectF outRect) {
-		float l = getPos().x - w / 2;
-		float t = getPos().y - h / 2;
+		float l = getPos().x;
+		float t = getPos().y;
 		outRect.set(l, t, l + w, t + h);
 	}
 
 	@Override
 	public void onJump() {
-		getVelocity().y = -40;
+		getVelocity().y = -20;
 	}
 
 }
