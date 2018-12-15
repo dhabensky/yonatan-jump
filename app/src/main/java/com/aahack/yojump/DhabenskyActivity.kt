@@ -84,7 +84,7 @@ class DhabenskyActivity : AppCompatActivity() {
 
 	private fun createCamera(): Camera {
 		val camera = Camera()
-//		camera.velocity.x = 8f
+		camera.velocity.x = 150f
 		return camera
 	}
 
@@ -102,11 +102,11 @@ class DhabenskyActivity : AppCompatActivity() {
 		val background = Background(point.x, point.y)
 
 		background.drawable = resources.getDrawable(R.drawable.ic_back_1)
-		background.secondDrawable = resources.getDrawable(R.drawable.ic_back_1)
 		background.w = point.x
 		background.h = point.y /2
 		background.pos.set(0f, (point.y- background.h).toFloat())
-		background.velocity.set(-300f,0f)
+		background.velocity.set(150f,0f)
+
 		return background
 	}
 

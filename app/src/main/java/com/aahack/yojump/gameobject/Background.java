@@ -6,8 +6,8 @@ import android.graphics.drawable.Drawable;
 import org.jetbrains.annotations.NotNull;
 
 public class Background extends SpriteObject {
+	float offset;
 	int x, y;
-	public Drawable secondDrawable;
 
 	public Background(int x, int y) {
 		this.x = x;
@@ -16,19 +16,28 @@ public class Background extends SpriteObject {
 
 	@Override
 	public void render(@NotNull Canvas canvas) {
-		super.render(canvas);
-
-		int l = (int) (getPos().x);
+		if ( offset< - getW()){
+			offset+=getW();
+		}
+		int l = (int) (getPos().x+offset);
 		int t = (int) (getPos().y);
 
-		if (getPos().x<x){
-			secondDrawable.setBounds(getDrawable().getBounds().right, t, getDrawable().getBounds().right + getW(), t + getH());
-			secondDrawable.draw(canvas);
-		}
-		if (getPos().x<-getW()){
-			getPos().x += getW();
-		}
 
+		getDrawable().setBounds(l, t, l + getW(), t + getH());
+		getDrawable().draw(canvas);
+		l+=getW();
+		getDrawable().setBounds(l, t, l + getW(), t + getH());
+		getDrawable().draw(canvas);
+
+
+
+
+	}
+
+	@Override
+	public void update(float delta) {
+		super.update(delta);
+		offset += -150f * delta;
 
 	}
 }
