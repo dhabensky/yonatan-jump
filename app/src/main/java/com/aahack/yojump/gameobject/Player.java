@@ -1,6 +1,7 @@
 package com.aahack.yojump.gameobject;
 
 import android.graphics.Canvas;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 
 import com.aahack.yojump.JumpListener;
@@ -50,6 +51,13 @@ public class Player extends GameObject implements JumpListener {
 			drawable = frames.get(frameIndex).getDrawable();
 			frameStart = now;
 		}
+	}
+
+	@Override
+	public void getBounds(@NotNull RectF outRect) {
+		float l = getPos().x - w / 2;
+		float t = getPos().y - h / 2;
+		outRect.set(l, t, l + w, t + h);
 	}
 
 	@Override

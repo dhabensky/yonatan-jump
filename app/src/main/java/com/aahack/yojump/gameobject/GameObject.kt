@@ -2,6 +2,7 @@ package com.aahack.yojump.gameobject
 
 import android.graphics.Canvas
 import android.graphics.PointF
+import android.graphics.RectF
 
 /**
  * Created on 15.12.2018.
@@ -23,6 +24,10 @@ open class GameObject {
 
 	open fun render(canvas: Canvas) {
 
+	}
+
+	open fun getBounds(outRect: RectF) {
+		TODO("implement me in your class")
 	}
 
 }

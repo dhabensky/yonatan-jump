@@ -35,9 +35,9 @@ class DhabenskyActivity : AppCompatActivity() {
 		val camera = createCamera()
 		val block = createBlock()
 
-		scene.addObject(player)
-		scene.addObject(block)
+		scene.setPlayer(player)
 		scene.setCamera(camera)
+		scene.addObject(block)
 	}
 
 	private fun createPlayerFrames(): List<AnimationFrame> {
@@ -52,10 +52,11 @@ class DhabenskyActivity : AppCompatActivity() {
 	private fun createPlayer(): Player {
 		val player = Player()
 		player.frames = createPlayerFrames()
-		player.pos.set(100f, 100f)
+		player.pos.set(100f, 220f)
+		player.acceleration.y = 3f
 		player.w = 100
 		player.h = 100
-		player.velocity.set(0f, 0f)
+		player.velocity.set(5f, -30f)
 		return player
 	}
 
