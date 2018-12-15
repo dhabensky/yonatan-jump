@@ -9,9 +9,9 @@ import android.graphics.PointF
  */
 open class GameObject {
 
-	var pos = PointF()
-	var velocity = PointF()
-	var acceleration = PointF()
+	val pos = PointF()
+	val velocity = PointF()
+	val acceleration = PointF()
 
 	fun update(delta: Float) {
 		pos.x += velocity.x * delta
