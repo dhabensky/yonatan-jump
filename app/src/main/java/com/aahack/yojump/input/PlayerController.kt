@@ -12,7 +12,7 @@ class PlayerController : View.OnClickListener {
 	var player: Player? = null
 
 	override fun onClick(v: View?) {
-		player?.onJump()
+		player?.jump()
 	}
 
 }

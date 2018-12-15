@@ -4,14 +4,13 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 
-import com.aahack.yojump.JumpListener;
 import com.aahack.yojump.util.AnimationFrame;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class Player extends GameObject implements JumpListener {
+public class Player extends GameObject {
 
 	public List<AnimationFrame> frames;
 	private long frameStart = 0;
@@ -22,6 +21,15 @@ public class Player extends GameObject implements JumpListener {
 	public int h;
 	public float gravity = 5f;
 	public float runSpeed = 3f;
+	private boolean jumping = false;
+
+	public void setJumping(boolean jumping) {
+		this.jumping = jumping;
+	}
+
+	public boolean isJumping() {
+		return jumping;
+	}
 
 	@Override
 	public void render(@NotNull Canvas canvas) {
@@ -60,9 +68,11 @@ public class Player extends GameObject implements JumpListener {
 		outRect.set(l, t, l + w, t + h);
 	}
 
-	@Override
-	public void onJump() {
-		getVelocity().y = -400;
+	public void jump() {
+		if (!jumping) {
+			jumping = true;
+			getVelocity().y = -400;
+		}
 	}
 
 }

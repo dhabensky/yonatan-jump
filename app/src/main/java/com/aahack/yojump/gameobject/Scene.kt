@@ -59,6 +59,7 @@ class Scene {
 				if (player.velocity.y > 0 && inside < threshold) {
 					player.pos.y = bounds.top - player.h
 					player.velocity.y = 0f
+					player.isJumping = false
 				}
 			}
 		}
