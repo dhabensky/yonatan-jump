@@ -39,7 +39,6 @@ class DhabenskyActivity : AppCompatActivity() {
 		val block = createBlock()
 		val background = createBackground()
 
-
 		scene.addObject(background)
 		scene.setPlayer(player)
 		scene.setCamera(camera)
@@ -78,6 +77,7 @@ class DhabenskyActivity : AppCompatActivity() {
 		block.w = 300
 		block.h = 20
 		block.pos.set(block.w / 2f, 150f)
+		block.tag = "block"
 		return block
 	}
 

@@ -48,8 +48,7 @@ class Scene {
 		player.getBounds(playerBounds)
 
 		for (obj in objects) {
-			if (obj == player) continue
-			if (obj == camera) continue
+			if (obj.tag != "block") continue
 
 			playerBoundsCopy.set(playerBounds)
 			obj.getBounds(bounds)

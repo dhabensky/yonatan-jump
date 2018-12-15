@@ -13,6 +13,7 @@ open class GameObject {
 	val pos = PointF()
 	val velocity = PointF()
 	val acceleration = PointF()
+	var tag: String? = null
 
 	fun update(delta: Float) {
 		pos.x += velocity.x * delta
