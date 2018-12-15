@@ -58,10 +58,10 @@ class DhabenskyActivity : AppCompatActivity() {
 		val player = Player()
 		player.frames = createPlayerFrames()
 		player.pos.set(100f, 220f)
-		player.acceleration.y = 3f
+		player.acceleration.y = 100f
 		player.w = 100
 		player.h = 100
-		player.velocity.set(5f, -30f)
+		player.velocity.set(200f, -30f)
 		return player
 	}
 
@@ -76,7 +76,7 @@ class DhabenskyActivity : AppCompatActivity() {
 		block.drawable = ColorDrawable(Color.BLACK)
 		block.w = 300
 		block.h = 20
-		block.pos.set(block.w / 2f, 150f)
+		block.pos.set(0f, 150f)
 		block.tag = "block"
 		return block
 	}
@@ -90,8 +90,8 @@ class DhabenskyActivity : AppCompatActivity() {
 
 		background.drawable = resources.getDrawable(R.drawable.ic_back_1)
 		background.w = point.x
-		background.h = point.y /2
-		background.pos.set((background.w/2).toFloat(), (point.y- background.h/2).toFloat())
+		background.h = point.y / 2
+		background.pos.set(0f, (point.y - background.h).toFloat())
 		return background
 	}
 

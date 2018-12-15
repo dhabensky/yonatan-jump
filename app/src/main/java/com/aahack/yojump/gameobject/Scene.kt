@@ -25,7 +25,8 @@ class Scene {
 		if (lastFrameMillis == 0L) {
 			lastFrameMillis = curMillis
 		}
-		val delta = (curMillis - lastFrameMillis) / 1000f / 5f
+		val delta = (curMillis - lastFrameMillis) / 1000f
+		lastFrameMillis = curMillis
 
 
 		for (obj in objects) {
