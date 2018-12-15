@@ -1,4 +1,4 @@
-package com.aahack.yojump
+package com.aahack.yojump.gameobject
 
 import android.graphics.Canvas
 import android.graphics.PointF
@@ -9,8 +9,8 @@ import android.graphics.PointF
  */
 open class GameObject {
 
-	var speed = PointF()
 	var pos = PointF()
+	var velocity = PointF()
 
 	open fun render(canvas: Canvas) {
 
