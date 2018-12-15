@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Window
 import android.view.WindowManager
+import com.aahack.yojump.gameobject.Camera
 import com.aahack.yojump.gameobject.Player
+import com.aahack.yojump.gameobject.Scene
 import kotlinx.android.synthetic.main.dhabensky_activity.*
 
 /**
@@ -32,7 +34,11 @@ class DhabenskyActivity : AppCompatActivity() {
 		player.h = 100
 		player.velocity.set(10f, 0f)
 
+		val camera = Camera()
+		camera.velocity.x = 8f
+
 		scene.addObject(player)
+		scene.setCamera(camera)
 	}
 
 }
