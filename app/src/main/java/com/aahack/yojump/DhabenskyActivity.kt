@@ -32,17 +32,22 @@ class DhabenskyActivity : AppCompatActivity() {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN)
 		setContentView(R.layout.dhabensky_activity)
 
+		val display:Display = windowManager.defaultDisplay
+		val point  = Point()
+		display.getSize(point)
+
 		gameView.scene = scene
 
 		val player = createPlayer()
 		val camera = createCamera()
 		val block = createBlock()
-		val background = createBackground()
+		val background = createBackground(point)
+
 
 		scene.addObject(background)
-		scene.setPlayer(player)
-		scene.setCamera(camera)
+		scene.addObject(player)
 		scene.addObject(block)
+		scene.setCamera(camera)
 	}
 
 	private fun createPlayerFrames(): List<AnimationFrame> {
@@ -57,11 +62,10 @@ class DhabenskyActivity : AppCompatActivity() {
 	private fun createPlayer(): Player {
 		val player = Player()
 		player.frames = createPlayerFrames()
-		player.pos.set(100f, 220f)
-		player.acceleration.y = 100f
+		player.pos.set(100f, 100f)
 		player.w = 100
 		player.h = 100
-		player.velocity.set(200f, -30f)
+		player.velocity.set(0f, 0f)
 		return player
 	}
 
@@ -76,22 +80,19 @@ class DhabenskyActivity : AppCompatActivity() {
 		block.drawable = ColorDrawable(Color.BLACK)
 		block.w = 300
 		block.h = 20
-		block.pos.set(0f, 150f)
-		block.tag = "block"
+		block.pos.set(block.w / 2f, 150f)
 		return block
 	}
 
-	private fun  createBackground(): Background{
-		val background = Background()
-
-		val display:Display = windowManager.defaultDisplay
-		val point  = Point()
-		display.getSize(point)
+	private fun  createBackground(point: Point): Background{
+		val background = Background(point.x, point.y)
 
 		background.drawable = resources.getDrawable(R.drawable.ic_back_1)
+		background.secondDrawable = resources.getDrawable(R.drawable.ic_back_1)
 		background.w = point.x
-		background.h = point.y / 2
-		background.pos.set(0f, (point.y - background.h).toFloat())
+		background.h = point.y /2
+		background.pos.set(0f, (point.y- background.h).toFloat())
+		background.velocity.set(-300f,0f)
 		return background
 	}
 
