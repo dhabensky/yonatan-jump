@@ -19,8 +19,6 @@ public class Player extends GameObject {
 	public Drawable drawable;
 	public int w;
 	public int h;
-	public float gravity = 5f;
-	public float runSpeed = 3f;
 	private boolean jumping = false;
 
 	public void setJumping(boolean jumping) {
