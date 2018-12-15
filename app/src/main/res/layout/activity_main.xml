@@ -26,12 +26,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="#FFFFFF"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:textStyle="bold"
         android:text="Собери Андроид Академию вместе с Йонатаном!"
         />
 
@@ -42,6 +41,8 @@
         android:layout_margin="20dp"
         android:background="@drawable/button_background"
         android:fontFamily="@font/sans-serif-medium"
+        android:textColor="#FFF"
+        android:textStyle="bold"
         android:text="Играть"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
