@@ -62,7 +62,7 @@ public class Player extends GameObject implements JumpListener {
 
 	@Override
 	public void onJump() {
-		getVelocity().y = -20;
+		getVelocity().y = -400;
 	}
 
 }
