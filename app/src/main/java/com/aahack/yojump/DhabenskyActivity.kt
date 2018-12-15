@@ -35,12 +35,17 @@ class DhabenskyActivity : AppCompatActivity() {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN)
 		setContentView(R.layout.dhabensky_activity)
 
+		val display:Display = windowManager.defaultDisplay
+		val point  = Point()
+		display.getSize(point)
+
 		gameView.scene = scene
 
 		val player = createPlayer()
 		val camera = createCamera()
 		val block = createBlock()
-		val background = createBackground()
+		val background = createBackground(point)
+
 
 		scene.addObject(background)
 		scene.setPlayer(player)
@@ -93,17 +98,15 @@ class DhabenskyActivity : AppCompatActivity() {
 		return block
 	}
 
-	private fun  createBackground(): Background{
-		val background = Background()
-
-		val display:Display = windowManager.defaultDisplay
-		val point  = Point()
-		display.getSize(point)
+	private fun  createBackground(point: Point): Background{
+		val background = Background(point.x, point.y)
 
 		background.drawable = resources.getDrawable(R.drawable.ic_back_1)
+		background.secondDrawable = resources.getDrawable(R.drawable.ic_back_1)
 		background.w = point.x
-		background.h = point.y / 2
-		background.pos.set(0f, (point.y - background.h).toFloat())
+		background.h = point.y /2
+		background.pos.set(0f, (point.y- background.h).toFloat())
+		background.velocity.set(-300f,0f)
 		return background
 	}
 
