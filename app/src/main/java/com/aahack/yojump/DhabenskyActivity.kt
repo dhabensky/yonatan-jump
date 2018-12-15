@@ -10,6 +10,7 @@ import com.aahack.yojump.gameobject.Block
 import com.aahack.yojump.gameobject.Camera
 import com.aahack.yojump.gameobject.Player
 import com.aahack.yojump.gameobject.Scene
+import com.aahack.yojump.util.AnimationFrame
 import kotlinx.android.synthetic.main.dhabensky_activity.*
 
 /**
@@ -39,13 +40,22 @@ class DhabenskyActivity : AppCompatActivity() {
 		scene.setCamera(camera)
 	}
 
+	private fun createPlayerFrames(): List<AnimationFrame> {
+		return arrayListOf(
+				AnimationFrame(getDrawable(R.drawable.ic_yonatan_left), 200),
+				AnimationFrame(getDrawable(R.drawable.ic_yonatan_mid), 100),
+				AnimationFrame(getDrawable(R.drawable.ic_yonatan_right), 200),
+				AnimationFrame(getDrawable(R.drawable.ic_yonatan_mid), 100)
+		)
+	}
+
 	private fun createPlayer(): Player {
 		val player = Player()
-		player.drawable = resources.getDrawable(R.drawable.ic_yonatan)
+		player.frames = createPlayerFrames()
 		player.pos.set(100f, 100f)
 		player.w = 100
 		player.h = 100
-		player.velocity.set(10f, 0f)
+		player.velocity.set(0f, 0f)
 		return player
 	}
 
