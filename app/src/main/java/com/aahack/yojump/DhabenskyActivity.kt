@@ -1,15 +1,14 @@
 package com.aahack.yojump
 
 import android.graphics.Color
+import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Display
 import android.view.Window
 import android.view.WindowManager
-import com.aahack.yojump.gameobject.Block
-import com.aahack.yojump.gameobject.Camera
-import com.aahack.yojump.gameobject.Player
-import com.aahack.yojump.gameobject.Scene
+import com.aahack.yojump.gameobject.*
 import kotlinx.android.synthetic.main.dhabensky_activity.*
 
 /**
@@ -33,7 +32,10 @@ class DhabenskyActivity : AppCompatActivity() {
 		val player = createPlayer()
 		val camera = createCamera()
 		val block = createBlock()
+		val background = createBackground()
 
+
+		scene.addObject(background)
 		scene.addObject(player)
 		scene.addObject(block)
 		scene.setCamera(camera)
@@ -62,6 +64,20 @@ class DhabenskyActivity : AppCompatActivity() {
 		block.h = 20
 		block.pos.set(block.w / 2f, 150f)
 		return block
+	}
+
+	private fun  createBackground(): Background{
+		val background = Background()
+
+		val display:Display = windowManager.defaultDisplay
+		val point  = Point()
+		display.getSize(point)
+
+		background.drawable = resources.getDrawable(R.drawable.ic_back_1)
+		background.w = point.x
+		background.h = point.y /2
+		background.pos.set((background.w/2).toFloat(), (point.y- background.h/2).toFloat())
+		return background
 	}
 
 }
