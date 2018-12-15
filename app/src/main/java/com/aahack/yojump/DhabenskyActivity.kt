@@ -1,6 +1,5 @@
 package com.aahack.yojump
 
-import android.graphics.RectF
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Window
@@ -28,7 +27,10 @@ class DhabenskyActivity : AppCompatActivity() {
 
 		val player = Player()
 		player.drawable = resources.getDrawable(R.drawable.ic_yonatan)
-		player.bounds = RectF(100f, 100f, 200f, 200f)
+		player.pos.set(100f, 100f)
+		player.w = 100
+		player.h = 100
+		player.velocity.set(10f, 0f)
 
 		scene.addObject(player)
 	}

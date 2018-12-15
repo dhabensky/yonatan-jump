@@ -12,39 +12,22 @@ import org.jetbrains.annotations.NotNull;
 public class Player extends GameObject implements JumpListener {
 
 	public Drawable drawable;
-	public RectF bounds = new RectF();
+	public int w;
+	public int h;
 	public float gravity = 5f;
 	public float runSpeed = 3f;
-
 	private boolean animating = false;
-
-	public void setBounds(RectF rectF) {
-		bounds.set(rectF);
-	}
 
 	@Override
 	public void render(@NotNull Canvas canvas) {
-		super.render(canvas);
 
-		drawable.setBounds(
-				(int) bounds.left,
-				(int) bounds.top,
-				(int) bounds.right,
-				(int) bounds.bottom
-		);
+		int l = (int) (getPos().x - w / 2);
+		int t = (int) (getPos().y - h / 2);
+
+		drawable.setBounds(l, t, l + w, t + h);
 		drawable.draw(canvas);
 
-		if (!animating) {
-			((Animatable) drawable).start();
-			animating = false;
-		}
-
-		// apply velocity
-		getPos().y += getVelocity().y;
-		getPos().x += getVelocity().x;
-
-		// apply acceleration
-		getVelocity().y += gravity;
+//		getVelocity().y += gravity;
 	}
 
 
