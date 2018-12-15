@@ -8,10 +8,10 @@
 
     <gradient
         android:angle="45"
-        android:centerX="float"
-        android:centerY="float"
+        android:centerX="0"
+        android:centerY="0"
         android:endColor="#01f1fa"
-        android:gradientRadius="integer"
+        android:gradientRadius="0"
         android:startColor="#0189ff"
         android:type="linear" />
 

@@ -40,7 +40,7 @@
         android:layout_height="42dp"
         android:layout_margin="20dp"
         android:background="@drawable/button_background"
-        android:fontFamily="@font/sans-serif-medium"
+        android:fontFamily="sans-serif-medium"
         android:textColor="#FFF"
         android:textStyle="bold"
         android:text="Играть"
