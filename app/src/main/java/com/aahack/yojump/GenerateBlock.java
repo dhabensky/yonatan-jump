@@ -25,7 +25,7 @@ public class GenerateBlock {
     public Block createBlock(int endOfFirstBlock){
         this.endOfFirstBlock = endOfFirstBlock;
         Block block = new Block();
-        int blockW = randomNum(jonW*2, maxW);
+        int blockW = randomNum(200, 1000);
 
         block.setH(20);
         //нет метода, передающего цвет. Зачем кадлый раз передавать цвет, если все плашки будут черными?
@@ -38,7 +38,7 @@ public class GenerateBlock {
             lastX = endOfFirstBlock;
             lastY = y;
         } else {
-            int x = randomNum(lastX + 200, lastX + maxJumpW + 400);
+            int x = randomNum(lastX + 200, lastX + maxJumpW + 600);
             int y = randomNum(lastY - maxJumpH, screenH);
             if(y < 300) y = 300;
             block.getPos().set(x, y);
