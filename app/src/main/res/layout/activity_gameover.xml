@@ -19,17 +19,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="30dp"
+            android:layout_margin="22dp"
             android:textColor="#FFF"
             android:textSize="30sp"
             android:textStyle="bold"
             android:text="GAME OVER!\nClick to play again"/>
+        <TextView
+            android:id="@+id/score_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFF"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:text="Your score - "/>
     </LinearLayout>
 
 
