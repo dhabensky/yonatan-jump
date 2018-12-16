@@ -3,6 +3,7 @@ package com.aahack.yojump
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
+import android.graphics.RectF
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
@@ -62,10 +63,8 @@ class DhabenskyActivity : AppCompatActivity() {
 		controller.player = player
 		gameView.setOnClickListener(controller)
 
-		// gameover timeout
-//		Handler().postDelayed( {
-//			startActivity(Intent(this, GameOverActivity::class.java))
-//		}, 4000)
+		scene.addObject(createDeathCollider())
+		scene.addObject(DeathListener())
 	}
 
 	private fun createPlayerFrames(): List<AnimationFrame> {
@@ -114,6 +113,34 @@ class DhabenskyActivity : AppCompatActivity() {
 		background.pos.set(0f, (point.y- background.h).toFloat())
 		background.velocity.set(600f,0f)
 		return background
+	}
+
+	private fun createDeathCollider(): GameObject {
+		val obj = Death()
+		obj.pos.set(0f, 900f)
+		obj.w = 10000
+		obj.h = 100
+		obj.velocity.x = 600f
+		return obj
+	}
+
+	private inner class DeathListener : GameObject() {
+		private var fired = false
+		override fun update(delta: Float) {
+			super.update(delta)
+			if (scene.gameOver) {
+				if (!fired) {
+					fired = true
+					Handler().post {
+						startActivity(Intent(this@DhabenskyActivity, GameOverActivity::class.java))
+					}
+				}
+			}
+		}
+
+		override fun getBounds(outRect: RectF) {
+
+		}
 	}
 
 }

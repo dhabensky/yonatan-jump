@@ -19,6 +19,8 @@ class Scene {
 	private val playerBoundsCopy = RectF()
 	private val bounds = RectF()
 
+	public var gameOver = false
+
 	fun render(canvas: Canvas) {
 
 		val curMillis = System.currentTimeMillis()
@@ -48,11 +50,19 @@ class Scene {
 		player.getBounds(playerBounds)
 
 		for (obj in objects) {
-			if (obj.tag == "block") {
-				processBlockCollision(obj)
-			}
-			else if (obj.tag == "collectable") {
-				processCollectableCollision(obj)
+			playerBoundsCopy.set(playerBounds)
+			obj.getBounds(bounds)
+
+			if (playerBoundsCopy.intersect(bounds)) {
+				if (obj.tag == "block") {
+					processBlockCollision(obj)
+				}
+				else if (obj.tag == "collectable") {
+					processCollectableCollision(obj)
+				}
+				else if (obj.tag == "death") {
+					processDeathCollision(obj)
+				}
 			}
 		}
 	}
@@ -60,21 +70,20 @@ class Scene {
 	private fun processBlockCollision(obj: GameObject) {
 
 		val threshold = 16f
-		playerBoundsCopy.set(playerBounds)
-		obj.getBounds(bounds)
-
-		if (playerBoundsCopy.intersect(bounds)) {
-			val inside = playerBounds.bottom - bounds.top
-			if (player.velocity.y > 0 && inside < threshold) {
-				player.pos.y = bounds.top - player.h
-				player.velocity.y = 0f
-				player.resetJumpCount()
-			}
+		val inside = playerBounds.bottom - bounds.top
+		if (player.velocity.y > 0 && inside < threshold) {
+			player.pos.y = bounds.top - player.h
+			player.velocity.y = 0f
+			player.resetJumpCount()
 		}
 	}
 
 	private fun processCollectableCollision(obj: GameObject) {
 		objects.remove(obj)
+	}
+
+	private fun processDeathCollision(obj: GameObject) {
+		gameOver = true
 	}
 
 	fun addObject(gameObject: GameObject) {

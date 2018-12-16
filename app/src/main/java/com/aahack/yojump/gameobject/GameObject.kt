@@ -28,7 +28,7 @@ open class GameObject {
 	}
 
 	open fun getBounds(outRect: RectF) {
-		TODO("implement me in your class")
+		throw NotImplementedError("not implemented in class ${javaClass.simpleName}")
 	}
 
 }

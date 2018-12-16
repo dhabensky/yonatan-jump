@@ -16,12 +16,12 @@ open class SpriteObject : GameObject() {
 
 	override fun render(canvas: Canvas) {
 		super.render(canvas)
-
-		val l = (pos.x).toInt()
-		val t = (pos.y).toInt()
-
-		drawable?.setBounds(l, t, l + w, t + h)
-		drawable?.draw(canvas)
+		drawable?.let {
+			val l = (pos.x).toInt()
+			val t = (pos.y).toInt()
+			it.setBounds(l, t, l + w, t + h)
+			it.draw(canvas)
+		}
 	}
 
 	override fun getBounds(outRect: RectF) {

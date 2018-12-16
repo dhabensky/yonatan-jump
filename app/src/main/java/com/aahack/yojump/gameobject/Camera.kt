@@ -1,6 +1,7 @@
 package com.aahack.yojump.gameobject
 
 import android.graphics.Matrix
+import android.graphics.RectF
 
 /**
  * Created on 15.12.2018.
@@ -13,6 +14,10 @@ class Camera : GameObject() {
 	fun getMatrix(): Matrix {
 		matrix.setTranslate(-pos.x, -pos.y)
 		return matrix
+	}
+
+	override fun getBounds(outRect: RectF) {
+
 	}
 
 }
