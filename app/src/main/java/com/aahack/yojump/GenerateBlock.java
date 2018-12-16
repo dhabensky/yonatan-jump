@@ -27,7 +27,7 @@ public class GenerateBlock {
         Block block = new Block();
         int blockW = randomNum(200, 1000);
 
-        block.setH(20);
+        block.setH(32);
         //нет метода, передающего цвет. Зачем кадлый раз передавать цвет, если все плашки будут черными?
         block.setDrawable(new ColorDrawable(Color.BLACK));
         block.setTag("block");
