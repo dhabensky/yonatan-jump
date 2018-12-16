@@ -20,7 +20,10 @@ public class GenerateBlock {
     private Random rand = new Random();
     private int screenH = getScreenHeight();
 
-    public Block createBlock(){
+    int endOfFirstBlock;
+
+    public Block createBlock(int endOfFirstBlock){
+        this.endOfFirstBlock = endOfFirstBlock;
         Block block = new Block();
         int blockW = randomNum(jonW*2, maxW);
         block.setW(blockW);
@@ -31,7 +34,7 @@ public class GenerateBlock {
         if(lastX == 0 && lastY == 0) {
             int y = randomNum(0, screenH);
             block.getPos().set(0, y);
-            lastX = blockW;
+            lastX = blockW + endOfFirstBlock;
             lastY = y;
         } else {
             int x = randomNum(lastX, lastX + maxJumpW);
