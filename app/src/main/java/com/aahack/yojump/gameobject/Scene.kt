@@ -12,6 +12,7 @@ class Scene {
 	private val objects = arrayListOf<GameObject>()
 	private lateinit var camera: Camera
 	private lateinit var player: Player
+	private lateinit var score: ScoreLabel
 
 	private var lastFrameMillis: Long = 0L
 
@@ -49,6 +50,8 @@ class Scene {
 			objects.remove(obj)
 		}
 		objToRemove.clear()
+
+		score.render(canvas)
 	}
 
 	private fun processCollisions(delta: Float) {
@@ -124,6 +127,11 @@ class Scene {
 	fun setPlayer(player: Player) {
 		addObject(player)
 		this.player = player
+	}
+
+	fun setScore(score: ScoreLabel) {
+		addObject(score)
+		this.score = score
 	}
 
 }

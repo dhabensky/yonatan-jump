@@ -75,6 +75,8 @@ class DhabenskyActivity : AppCompatActivity() {
 		scene.addObject(createDeathCollider())
 		scene.addObject(DeathListener())
 
+		scene.setScore(ScoreLabel(player).apply { velocity.x = 600f; pos.set(1200f, 100f) })
+
 		backgroundMusic = MediaPlayer.create(this, R.raw.background)
 		backgroundMusic.setVolume(0.5f, 0.5f)
 		backgroundMusic.isLooping = true

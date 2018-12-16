@@ -26,6 +26,8 @@ public class Player extends GameObject {
 	private int maxJumps = 2;
 	public int jumpVelocity;
 
+	public int score = 0;
+
 	private boolean colliding = false;
 
 	public void setColliding(boolean colliding) {
@@ -95,6 +97,7 @@ public class Player extends GameObject {
 		if (collectSound != null) {
 			collectSound.start();
 		}
+		score += 666;
 	}
 
 }
