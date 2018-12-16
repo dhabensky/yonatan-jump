@@ -188,7 +188,7 @@ class DhabenskyActivity : AppCompatActivity() {
 	private fun createDeathCollider(): GameObject {
 		val obj = Death()
 		obj.drawable = ColorDrawable(Color.RED)
-		obj.pos.set(0f, 1080f)
+		obj.pos.set(0f, 1200f)
 		obj.w = 3000
 		obj.h = 200
 		obj.velocity.x = 600f

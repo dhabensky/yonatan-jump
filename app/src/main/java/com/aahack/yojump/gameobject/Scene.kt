@@ -2,6 +2,9 @@ package com.aahack.yojump.gameobject
 
 import android.graphics.Canvas
 import android.graphics.RectF
+import android.util.Log
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created on 15.12.2018.
@@ -69,6 +72,7 @@ class Scene {
 
 			if (playerBoundsCopy.intersect(bounds)) {
 				if (obj.tag == "block") {
+					log("collision with block")
 					processBlockCollision(obj, playerBoundsCopy)
 					colliding = true
 				}
@@ -87,10 +91,14 @@ class Scene {
 	private fun processBlockCollision(obj: GameObject, collision: RectF) {
 
 		if (player.velocity.y < 0) {
+			log("negative velocity. END")
 			return
 		}
 
+		log("collision: $collision, player: $playerBounds")
+
 		if (collision.bottom != playerBounds.bottom) {
+			log("bottom not match. END")
 			return
 		}
 
@@ -100,9 +108,13 @@ class Scene {
 		val newCollision = nearTop || !player.isColliding
 
 		if (newCollision) {
+			log("new collision. END")
 			player.pos.y = bounds.top - player.h
 			player.velocity.y = 0f
 			player.resetJumpCount()
+		}
+		else {
+			log("ignoring collision. END")
 		}
 	}
 
@@ -134,4 +146,12 @@ class Scene {
 		this.score = score
 	}
 
+	companion object {
+		const val TAG = "COLLISION"
+		private val formatter = SimpleDateFormat("mm:ss:SSS")
+
+		fun log(message: String) {
+			Log.d(TAG, formatter.format(Date()) + " " + message)
+		}
+	}
 }
