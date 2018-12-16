@@ -52,6 +52,12 @@ class DhabenskyActivity : AppCompatActivity() {
 		scene.setCamera(camera)
 		scene.addObject(block)
 
+		val gen = GenerateBlock()
+		for (i in 0..30) {
+			val b = gen.createBlock(1800)
+			scene.addObject(b)
+		}
+
 		val controller = PlayerController()
 		controller.player = player
 		gameView.setOnClickListener(controller)
@@ -73,18 +79,19 @@ class DhabenskyActivity : AppCompatActivity() {
 
 	private fun createPlayer(): Player {
 		val player = Player()
+		player.jumpVelocity = 1000
 		player.frames = createPlayerFrames()
-		player.pos.set(100f, 500f)
-		player.acceleration.y = 500f
-		player.w = 100
-		player.h = 100
-		player.velocity.set(200f, -30f)
+		player.pos.set(100f, 400f)
+		player.acceleration.y = 2000f
+		player.w = 200
+		player.h = 200
+		player.velocity.set(600f, -30f)
 		return player
 	}
 
 	private fun createCamera(): Camera {
 		val camera = Camera()
-//		camera.velocity.x = 8f
+		camera.velocity.x = 600f
 		return camera
 	}
 
@@ -102,11 +109,10 @@ class DhabenskyActivity : AppCompatActivity() {
 		val background = Background(point.x, point.y)
 
 		background.drawable = resources.getDrawable(R.drawable.ic_back_1)
-		background.secondDrawable = resources.getDrawable(R.drawable.ic_back_1)
 		background.w = point.x
 		background.h = point.y /2
 		background.pos.set(0f, (point.y- background.h).toFloat())
-		background.velocity.set(-300f,0f)
+		background.velocity.set(600f,0f)
 		return background
 	}
 

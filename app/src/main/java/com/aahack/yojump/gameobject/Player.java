@@ -20,6 +20,7 @@ public class Player extends GameObject {
 	public int w;
 	public int h;
 	private boolean jumping = false;
+	public int jumpVelocity;
 
 	public void setJumping(boolean jumping) {
 		this.jumping = jumping;
@@ -69,7 +70,7 @@ public class Player extends GameObject {
 	public void jump() {
 		if (!jumping) {
 			jumping = true;
-			getVelocity().y = -400;
+			getVelocity().y = -jumpVelocity;
 		}
 	}
 
