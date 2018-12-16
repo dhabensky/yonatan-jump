@@ -44,4 +44,8 @@ class GameOverActivity : AppCompatActivity() {
 		findViewById<TextView>(R.id.score_text_view).setText(text)
 	}
 
+	override fun onBackPressed() {
+
+	}
+
 }

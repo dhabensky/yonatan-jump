@@ -257,4 +257,8 @@ class DhabenskyActivity : AppCompatActivity() {
 
 	}
 
+	override fun onBackPressed() {
+
+	}
+
 }
