@@ -1,10 +1,12 @@
 package com.aahack.yojump
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Window
 import android.view.WindowManager
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_gameover.*
 
 /**
@@ -12,6 +14,16 @@ import kotlinx.android.synthetic.main.activity_gameover.*
  * @author dhabensky <dhabensky@yandex.ru>
  */
 class GameOverActivity : AppCompatActivity() {
+
+	companion object {
+
+		open fun newIntent(score: Long, context: Context): Intent? {
+			val intent = Intent(context, GameOverActivity::class.java)
+			intent.putExtra("score", score)
+			return intent
+		}
+
+	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -27,6 +39,9 @@ class GameOverActivity : AppCompatActivity() {
 							.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 			)
 		}
+
+		val text = "Your score - " + intent.extras.get("score")
+		findViewById<TextView>(R.id.score_text_view).setText(text)
 	}
 
 }

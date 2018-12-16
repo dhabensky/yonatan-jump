@@ -1,6 +1,5 @@
 package com.aahack.yojump
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.RectF
@@ -184,13 +183,18 @@ class DhabenskyActivity : AppCompatActivity() {
 
 	private inner class DeathListener : GameObject() {
 		private var fired = false
+		val current = System.currentTimeMillis()
 		override fun update(delta: Float) {
 			super.update(delta)
 			if (scene.gameOver) {
 				if (!fired) {
 					fired = true
+					val endTime = System.currentTimeMillis()
+					val resultScore = endTime-current
 					Handler().post {
-						startActivity(Intent(this@DhabenskyActivity, GameOverActivity::class.java))
+						intent = GameOverActivity.newIntent(resultScore,this@DhabenskyActivity)
+						//startActivity(Intent(this@DhabenskyActivity, GameOverActivity::class.java))
+						startActivity(intent)
 					}
 				}
 			}
