@@ -26,6 +26,16 @@ public class Player extends GameObject {
 	private int maxJumps = 2;
 	public int jumpVelocity;
 
+	private boolean colliding = false;
+
+	public void setColliding(boolean colliding) {
+		this.colliding = colliding;
+	}
+
+	public boolean isColliding() {
+		return colliding;
+	}
+
 	public void resetJumpCount() {
 		this.jumpCount = 0;
 	}

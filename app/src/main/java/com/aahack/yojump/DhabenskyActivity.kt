@@ -81,7 +81,7 @@ class DhabenskyActivity : AppCompatActivity() {
 		val player = Player()
 		player.jumpVelocity = 1000
 		player.frames = createPlayerFrames()
-		player.pos.set(100f, 400f)
+		player.pos.set(100f, 300f)
 		player.acceleration.y = 2000f
 		player.w = 200
 		player.h = 200

@@ -35,7 +35,7 @@ class Scene {
 			obj.update(delta)
 		}
 
-		processCollisions()
+		processCollisions(delta)
 
 		canvas.matrix = camera.getMatrix()
 
@@ -45,9 +45,14 @@ class Scene {
 
 	}
 
-	private fun processCollisions() {
+	private fun processCollisions(delta: Float) {
 
 		player.getBounds(playerBounds)
+		if (player.velocity.y > 0) {
+			bounds.top -= player.velocity.y * delta
+		}
+
+		var colliding = false
 
 		for (obj in objects) {
 			playerBoundsCopy.set(playerBounds)
@@ -55,7 +60,8 @@ class Scene {
 
 			if (playerBoundsCopy.intersect(bounds)) {
 				if (obj.tag == "block") {
-					processBlockCollision(obj)
+					processBlockCollision(obj, playerBoundsCopy)
+					colliding = true
 				}
 				else if (obj.tag == "collectable") {
 					processCollectableCollision(obj)
@@ -65,13 +71,26 @@ class Scene {
 				}
 			}
 		}
+
+		player.isColliding = colliding
 	}
 
-	private fun processBlockCollision(obj: GameObject) {
+	private fun processBlockCollision(obj: GameObject, collision: RectF) {
+
+		if (player.velocity.y < 0) {
+			return
+		}
+
+		if (collision.bottom != playerBounds.bottom) {
+			return
+		}
 
 		val threshold = 16f
-		val inside = playerBounds.bottom - bounds.top
-		if (player.velocity.y > 0 && inside < threshold) {
+		val nearTop = collision.height() < threshold
+
+		val newCollision = nearTop || !player.isColliding
+
+		if (newCollision) {
 			player.pos.y = bounds.top - player.h
 			player.velocity.y = 0f
 			player.resetJumpCount()
