@@ -10,6 +10,7 @@ import com.aahack.yojump.util.AnimationFrame;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Random;
 
 public class Player extends GameObject {
 
@@ -40,6 +41,18 @@ public class Player extends GameObject {
 
 	public void resetJumpCount() {
 		this.jumpCount = 0;
+	}
+
+	private float seconds = 0f;
+
+	@Override
+	public void update(float delta) {
+		super.update(delta);
+		seconds += delta;
+		if (seconds > 1) {
+			seconds -= 1;
+			score += 3;
+		}
 	}
 
 	@Override
@@ -97,7 +110,9 @@ public class Player extends GameObject {
 		if (collectSound != null) {
 			collectSound.start();
 		}
-		score += 666;
+		score += 200 + rand.nextInt(200);
 	}
+
+	private Random rand = new Random();
 
 }
