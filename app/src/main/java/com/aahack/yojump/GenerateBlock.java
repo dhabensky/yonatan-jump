@@ -61,7 +61,17 @@ public class GenerateBlock {
                     block.getPos().x + block.getW() / 2,
                     block.getPos().y - block.getH()
             ));
-        }
+        }else {
+        	if (rand.nextInt(3)<1){
+				scene.delayedAddObject(DhabenskyActivity.Companion.createBurgers(
+						resources,
+						rand.nextInt(DhabenskyActivity.Companion.getBIds().length),
+						rand.nextInt((int) ((block.getPos().x - block.getPos().x + block.getW()) + 1)) + block.getPos().x + block.getW(),
+						block.getPos().y - block.getH()
+				));
+			}
+
+		}
 
         return block;
     }
