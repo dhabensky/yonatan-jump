@@ -49,7 +49,7 @@ public class GenerateBlock {
         if(blockW % 2 == 0) {
             block.setDrawable(new ColorDrawable(Color.BLACK));
         } else {
-            block.setDrawable(new ColorDrawable(Color.GREEN));
+            block.setDrawable(new ColorDrawable(Color.BLUE));
             block.setDestructible(true);
         }
         block.setW(blockW);
