@@ -52,6 +52,12 @@ class DhabenskyActivity : AppCompatActivity() {
 		scene.setCamera(camera)
 		scene.addObject(block)
 
+		val gen = GenerateBlock()
+		for (i in 0..30) {
+			val b = gen.createBlock()
+			scene.addObject(b)
+		}
+
 		val controller = PlayerController()
 		controller.player = player
 		gameView.setOnClickListener(controller)
@@ -78,13 +84,13 @@ class DhabenskyActivity : AppCompatActivity() {
 		player.acceleration.y = 500f
 		player.w = 100
 		player.h = 100
-		player.velocity.set(200f, -30f)
+		player.velocity.set(400f, -30f)
 		return player
 	}
 
 	private fun createCamera(): Camera {
 		val camera = Camera()
-		camera.velocity.x = 150f
+		camera.velocity.x = 400f
 		return camera
 	}
 
@@ -105,8 +111,7 @@ class DhabenskyActivity : AppCompatActivity() {
 		background.w = point.x
 		background.h = point.y /2
 		background.pos.set(0f, (point.y- background.h).toFloat())
-		background.velocity.set(150f,0f)
-
+		background.velocity.set(400f,0f)
 		return background
 	}
 
