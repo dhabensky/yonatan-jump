@@ -104,6 +104,13 @@ class DhabenskyActivity : AppCompatActivity() {
 						b.pos.y - b.h
 				))
 			}
+			if(rand.nextInt(2)<1){
+				scene.addObject(createBurgers(
+						rand.nextInt(drawables.bIds.size),
+						b.pos.x  + b.w,
+						b.pos.y - b.h*2
+				))
+			}
 		}
 
 		val controller = PlayerController()
@@ -153,6 +160,51 @@ class DhabenskyActivity : AppCompatActivity() {
 			blocks.add(b)
 		}
 		return blocks
+	}
+
+	private fun createBurgers(index: Int, x: Float, y: Float): GameObject {
+		val obj = CollectableObject()
+		obj.drawable = resources.getDrawable(drawables.bIds[index])
+		obj.w = 70
+		obj.h = 60
+		obj.pos.set(x - obj.w / 2, y - obj.h / 2)
+		return obj
+	}
+
+	private fun createCollectable(index: Int, x: Float, y: Float): GameObject {
+		val obj = CollectableObject()
+		obj.drawable = resources.getDrawable(drawables.ids[index])
+		obj.w = 150
+		obj.h = 180
+		obj.pos.set(x - obj.w / 2, y - obj.h / 2)
+		return obj
+	}
+
+	object drawables {
+		val ids = arrayOf(
+				R.drawable.z_1,
+				R.drawable.z_2,
+				R.drawable.z_3,
+				R.drawable.z_4,
+				R.drawable.z_5,
+				R.drawable.z_6,
+				R.drawable.z_7,
+				R.drawable.z_8,
+				R.drawable.z_9,
+				R.drawable.z_10,
+				R.drawable.z_11,
+				R.drawable.z_12,
+				R.drawable.z_13,
+				R.drawable.z_14,
+				R.drawable.z_15,
+				R.drawable.z_16,
+				R.drawable.z_17,
+				R.drawable.z_18
+		)
+		val bIds = arrayOf(
+				R.drawable.burger,
+				R.drawable.burger_another
+		)
 	}
 
 	private fun createPlayerFrames(): List<AnimationFrame> {
