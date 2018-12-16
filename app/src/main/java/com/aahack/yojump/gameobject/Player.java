@@ -22,14 +22,12 @@ public class Player extends GameObject {
 	public Drawable drawable;
 	public int w;
 	public int h;
-	private boolean jumping = false;
+	private int jumpCount = 0;
+	private int maxJumps = 2;
+	public int jumpVelocity;
 
-	public void setJumping(boolean jumping) {
-		this.jumping = jumping;
-	}
-
-	public boolean isJumping() {
-		return jumping;
+	public void resetJumpCount() {
+		this.jumpCount = 0;
 	}
 
 	@Override
@@ -70,9 +68,9 @@ public class Player extends GameObject {
 	}
 
 	public void jump() {
-		if (!jumping) {
-			jumping = true;
-			getVelocity().y = -400;
+		if (jumpCount < maxJumps) {
+			jumpCount ++;
+			getVelocity().y = -jumpVelocity;
 			if (jumpSound != null) {
 				jumpSound.start();
 			}
