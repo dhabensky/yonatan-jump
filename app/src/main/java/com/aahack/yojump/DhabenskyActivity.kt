@@ -42,6 +42,20 @@ class DhabenskyActivity : AppCompatActivity() {
 			return obj
 		}
 
+		fun createBurgers(resources: Resources, index: Int, x: Float, y: Float): GameObject {
+			val obj = CollectableObject()
+			obj.drawable = resources.getDrawable(bIds[index])
+			obj.w = 70
+			obj.h = 60
+			obj.pos.set(x - obj.w / 2, y - obj.h / 2)
+			return obj
+		}
+
+		val bIds = arrayOf(
+				R.drawable.burger,
+				R.drawable.burger_another
+		)
+
 		val ids = arrayOf(
 				R.drawable.z_1,
 				R.drawable.z_2,
@@ -105,7 +119,8 @@ class DhabenskyActivity : AppCompatActivity() {
 				))
 			}
 			if(rand.nextInt(2)<1){
-				scene.addObject(createBurgers(
+				scene.delayedAddObject(createBurgers(
+						resources,
 						rand.nextInt(drawables.bIds.size),
 						b.pos.x  + b.w,
 						b.pos.y - b.h*2
