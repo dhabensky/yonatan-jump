@@ -30,6 +30,8 @@ class DhabenskyActivity : AppCompatActivity() {
 		const val HEIGHT = 1080f
 	}
 
+	private lateinit var backgroundMusic: MediaPlayer
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
@@ -74,6 +76,26 @@ class DhabenskyActivity : AppCompatActivity() {
 
 		scene.addObject(createDeathCollider())
 		scene.addObject(DeathListener())
+
+		backgroundMusic = MediaPlayer.create(this, R.raw.background)
+		backgroundMusic.setVolume(0.5f, 0.5f)
+		backgroundMusic.isLooping = true
+		backgroundMusic.start()
+	}
+
+	override fun onPause() {
+		super.onPause()
+		backgroundMusic.pause()
+	}
+
+	override fun onResume() {
+		super.onResume()
+		backgroundMusic.start()
+	}
+
+	override fun onDestroy() {
+		super.onDestroy()
+		backgroundMusic.release()
 	}
 
 
@@ -137,9 +159,9 @@ class DhabenskyActivity : AppCompatActivity() {
 		player.w = 200
 		player.h = 200
 		player.velocity.set(600f, 0f)
-		player.jumpSound = MediaPlayer.create(this, R.raw.jump)
-		player.jumpSound.setVolume(1f, 1f)
-		player.collectSound = MediaPlayer.create(this, R.raw.applause)
+//		player.jumpSound = MediaPlayer.create(this, R.raw.jump)
+//		player.jumpSound.setVolume(1f, 1f)
+		player.collectSound = MediaPlayer.create(this, R.raw.jump)
 		player.collectSound.setVolume(1f, 1f)
 		return player
 	}
