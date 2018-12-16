@@ -10,7 +10,7 @@ import com.aahack.yojump.gameobject.Player;
 import java.util.Random;
 
 public class GenerateBlock {
-    int bound = 100;
+    int bound = 200;
     int lastX;
     int lastY;
     int screenH = getScreenHeight();
@@ -34,11 +34,11 @@ public class GenerateBlock {
             betweenBlocksX = lastX + 150;
             int x = randomNum(betweenBlocksX, betweenBlocksX + 500);
             int y = randomNum(bound, screenH);
-            if(counter %2 == 0) {
+            /*if(counter %2 == 0) {
                 y = randomNum(bound, screenH/2 -50);
             } else {
                 y = randomNum(screenH/2 + 50, screenH - 50);
-            }
+            }*/
             block.getPos().set(x, y);
             lastX = x + blockW;
             lastY = y;
