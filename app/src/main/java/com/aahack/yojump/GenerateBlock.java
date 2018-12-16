@@ -5,45 +5,49 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
 import com.aahack.yojump.gameobject.Block;
+import com.aahack.yojump.gameobject.Player;
 
 import java.util.Random;
 
 public class GenerateBlock {
-    //размеры человечка
-    private int jonW = 100;
-    private int jonH = 100;
-    private int maxW = 300;
-    private int maxJumpW = 150;
-    private int maxJumpH = 300;
+    private int bound = 100;
     private int lastX;
     private int lastY;
-    private Random rand = new Random();
     private int screenH = getScreenHeight();
+    private Random rand = new Random();
+    private int counter;
 
-    int endOfFirstBlock = 1800;
-
-    public Block createBlock(int endOfFirstBlock){
-        this.endOfFirstBlock = endOfFirstBlock;
+    public Block createBlock(){
+        counter++;
         Block block = new Block();
-        int blockW = randomNum(200, 1000);
-
         block.setH(32);
-        //нет метода, передающего цвет. Зачем кадлый раз передавать цвет, если все плашки будут черными?
-        block.setDrawable(new ColorDrawable(Color.BLACK));
-        block.setTag("block");
+        int blockW;
+        int betweenBlocksX;
         if(lastX == 0 && lastY == 0) {
             blockW = 1800;
             int y = 750;
             block.getPos().set(0, y);
-            lastX = endOfFirstBlock;
+            lastX = blockW;
             lastY = y;
         } else {
-            int x = randomNum(lastX + 200, lastX + maxJumpW + 600);
-            int y = randomNum(lastY - maxJumpH, screenH);
-            if(y < 300) y = 300;
+            blockW = randomNum(300, 1000);
+            betweenBlocksX = lastX + 150;
+            int x = randomNum(betweenBlocksX, betweenBlocksX + 500);
+            int y = randomNum(bound, screenH);
+            /*if(counter %2 == 0) {
+                y = randomNum(bound, screenH/2 -50);
+            } else {
+                y = randomNum(screenH/2 + 50, screenH - 50);
+            }*/
             block.getPos().set(x, y);
             lastX = x + blockW;
             lastY = y;
+        }
+
+        if(blockW % 2 == 0) {
+            block.setDrawable(new ColorDrawable(Color.BLACK));
+        } else {
+            block.setDrawable(new ColorDrawable(Color.GREEN));
         }
         block.setW(blockW);
         return block;
