@@ -111,7 +111,7 @@ class DhabenskyActivity : AppCompatActivity() {
 		val blocks = arrayListOf<SpriteObject>()
 		val gen = GenerateBlock()
 		for (i in 0..30) {
-			val b = gen.createBlock(1800)
+			val b = gen.createBlock()
 			blocks.add(b)
 		}
 		return blocks
