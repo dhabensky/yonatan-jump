@@ -6,10 +6,12 @@ import android.graphics.drawable.ColorDrawable;
 
 import com.aahack.yojump.gameobject.Block;
 import com.aahack.yojump.gameobject.Player;
+import com.aahack.yojump.gameobject.Scene;
 
 import java.util.Random;
 
 public class GenerateBlock {
+    public Scene scene;
     int bound = 100;
     int lastX;
     int lastY;
@@ -19,7 +21,7 @@ public class GenerateBlock {
 
     public Block createBlock(){
         counter++;
-        Block block = new Block();
+        Block block = new Block(scene);
         block.setH(32);
         int blockW;
         int betweenBlocksX;
@@ -48,6 +50,7 @@ public class GenerateBlock {
             block.setDrawable(new ColorDrawable(Color.BLACK));
         } else {
             block.setDrawable(new ColorDrawable(Color.GREEN));
+            block.setDestructible(true);
         }
         block.setW(blockW);
         return block;

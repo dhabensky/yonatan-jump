@@ -48,6 +48,7 @@ class DhabenskyActivity : AppCompatActivity() {
 		display.getSize(screenSize)
 
 		gameView.scene = scene
+		gen.scene = scene
 
 		val player = createPlayer()
 		val camera = createCamera(screenSize)

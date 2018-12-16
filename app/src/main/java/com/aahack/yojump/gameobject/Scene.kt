@@ -51,6 +51,7 @@ class Scene {
 		}
 
 		for (obj in objToRemove) {
+			Log.d("GENERATION", "removing ${obj}")
 			objects.remove(obj)
 		}
 		objToRemove.clear()
@@ -128,6 +129,10 @@ class Scene {
 			player.pos.y = bounds.top - player.h
 			player.velocity.y = 0f
 			player.resetJumpCount()
+
+			if (obj is Block && obj.destructible) {
+				obj.scheduleDescruct()
+			}
 		}
 		else {
 			log("ignoring collision. END")
@@ -177,6 +182,10 @@ class Scene {
 
 	fun delayedAddObject(obj: GameObject) {
 		objToAdd.add(obj)
+	}
+
+	fun delayedRemoveObject(obj: GameObject) {
+		objToRemove.add(obj)
 	}
 
 }
