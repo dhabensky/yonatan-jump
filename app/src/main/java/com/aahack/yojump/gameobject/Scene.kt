@@ -154,4 +154,9 @@ class Scene {
 			Log.d(TAG, formatter.format(Date()) + " " + message)
 		}
 	}
+
+	fun getScore(): String? {
+		return score.getScore()
+	}
+
 }

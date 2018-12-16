@@ -197,17 +197,14 @@ class DhabenskyActivity : AppCompatActivity() {
 
 	private inner class DeathListener : GameObject() {
 		private var fired = false
-		val current = System.currentTimeMillis()
 		override fun update(delta: Float) {
 			super.update(delta)
 			if (scene.gameOver) {
 				if (!fired) {
 					fired = true
-					val endTime = System.currentTimeMillis()
-					val resultScore = endTime-current
+					val resultScore = scene.getScore()
 					Handler().post {
 						intent = GameOverActivity.newIntent(resultScore,this@DhabenskyActivity)
-						//startActivity(Intent(this@DhabenskyActivity, GameOverActivity::class.java))
 						startActivity(intent)
 					}
 				}

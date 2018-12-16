@@ -42,4 +42,8 @@ class ScoreLabel(
 
 	}
 
+	fun getScore(): String? {
+		return text
+	}
+
 }
