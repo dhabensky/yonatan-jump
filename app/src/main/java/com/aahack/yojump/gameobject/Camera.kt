@@ -10,9 +10,12 @@ import android.graphics.RectF
 class Camera : GameObject() {
 
 	private val matrix = Matrix()
+	var scale = 1f
 
 	fun getMatrix(): Matrix {
-		matrix.setTranslate(-pos.x, -pos.y)
+		matrix.reset()
+		matrix.preScale(scale, scale)
+		matrix.preTranslate(-pos.x, -pos.y)
 		return matrix
 	}
 

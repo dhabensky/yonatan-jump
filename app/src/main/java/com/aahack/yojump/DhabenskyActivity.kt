@@ -13,10 +13,6 @@ import android.view.Display
 import android.view.Window
 import android.view.WindowManager
 import com.aahack.yojump.gameobject.*
-import com.aahack.yojump.gameobject.Block
-import com.aahack.yojump.gameobject.Camera
-import com.aahack.yojump.gameobject.Player
-import com.aahack.yojump.gameobject.Scene
 import com.aahack.yojump.input.PlayerController
 import com.aahack.yojump.util.AnimationFrame
 import kotlinx.android.synthetic.main.dhabensky_activity.*
@@ -29,6 +25,11 @@ class DhabenskyActivity : AppCompatActivity() {
 
 	private var scene = Scene()
 
+	companion object {
+		const val WIDTH = 1920f
+		const val HEIGHT = 1080f
+	}
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
@@ -37,16 +38,16 @@ class DhabenskyActivity : AppCompatActivity() {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN)
 		setContentView(R.layout.dhabensky_activity)
 
-		val display:Display = windowManager.defaultDisplay
-		val point  = Point()
-		display.getSize(point)
+		val display: Display = windowManager.defaultDisplay
+		val screenSize = Point()
+		display.getSize(screenSize)
 
 		gameView.scene = scene
 
 		val player = createPlayer()
-		val camera = createCamera()
+		val camera = createCamera(screenSize)
 		val block = createBlock()
-		val background = createBackground(point)
+		val background = createBackground(screenSize)
 
 
 		scene.addObject(background)
@@ -91,9 +92,10 @@ class DhabenskyActivity : AppCompatActivity() {
 		return player
 	}
 
-	private fun createCamera(): Camera {
+	private fun createCamera(screenSize: Point): Camera {
 		val camera = Camera()
 		camera.velocity.x = 600f
+		camera.scale = screenSize.y / HEIGHT
 		return camera
 	}
 
@@ -107,22 +109,24 @@ class DhabenskyActivity : AppCompatActivity() {
 		return block
 	}
 
-	private fun  createBackground(point: Point): Background{
-		val background = Background(point.x, point.y)
+	private fun createBackground(point: Point): Background {
+		val background = Background()
 
 		background.drawable = resources.getDrawable(R.drawable.ic_back_1)
-		background.w = point.x
-		background.h = point.y /2
-		background.pos.set(0f, (point.y- background.h).toFloat())
-		background.velocity.set(600f,0f)
+		val ratio = background.drawable!!.intrinsicWidth / background.drawable!!.intrinsicHeight
+		background.w = (HEIGHT * ratio).toInt()
+		background.h = (HEIGHT).toInt()
+		background.pos.set(0f, 200f)
+		background.velocity.set(600f, 0f)
 		return background
 	}
 
 	private fun createDeathCollider(): GameObject {
 		val obj = Death()
-		obj.pos.set(0f, 900f)
-		obj.w = 10000
-		obj.h = 100
+		obj.drawable = ColorDrawable(Color.RED)
+		obj.pos.set(0f, 1080f)
+		obj.w = 3000
+		obj.h = 200
 		obj.velocity.x = 600f
 		return obj
 	}
