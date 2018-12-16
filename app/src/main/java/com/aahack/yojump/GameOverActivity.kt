@@ -17,7 +17,7 @@ class GameOverActivity : AppCompatActivity() {
 
 	companion object {
 
-		open fun newIntent(score: Long, context: Context): Intent? {
+		open fun newIntent(score: String?, context: Context): Intent? {
 			val intent = Intent(context, GameOverActivity::class.java)
 			intent.putExtra("score", score)
 			return intent

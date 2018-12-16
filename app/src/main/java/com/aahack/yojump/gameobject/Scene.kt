@@ -134,4 +134,8 @@ class Scene {
 		this.score = score
 	}
 
+	fun getScore(): String? {
+		return score.getScore()
+	}
+
 }

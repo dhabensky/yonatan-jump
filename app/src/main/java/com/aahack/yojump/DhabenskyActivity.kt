@@ -204,7 +204,8 @@ class DhabenskyActivity : AppCompatActivity() {
 				if (!fired) {
 					fired = true
 					val endTime = System.currentTimeMillis()
-					val resultScore = endTime-current
+					//val resultScore = endTime-current
+					val resultScore = scene.getScore()
 					Handler().post {
 						intent = GameOverActivity.newIntent(resultScore,this@DhabenskyActivity)
 						//startActivity(Intent(this@DhabenskyActivity, GameOverActivity::class.java))
