@@ -16,6 +16,7 @@ import com.aahack.yojump.gameobject.*
 import com.aahack.yojump.input.PlayerController
 import com.aahack.yojump.util.AnimationFrame
 import kotlinx.android.synthetic.main.dhabensky_activity.*
+import java.util.*
 
 /**
  * Created on 15.12.2018.
@@ -55,10 +56,17 @@ class DhabenskyActivity : AppCompatActivity() {
 		scene.setCamera(camera)
 		scene.addObject(block)
 
-		val gen = GenerateBlock()
-		for (i in 0..30) {
-			val b = gen.createBlock(1800)
+		val blocks = createBlocks()
+		val rand = Random()
+		for (b in blocks) {
 			scene.addObject(b)
+			if (rand.nextInt(5) < 1) {
+				scene.addObject(createCollectable(
+						rand.nextInt(drawables.ids.size),
+						b.pos.x + b.w / 2,
+						b.pos.y - b.h
+				))
+			}
 		}
 
 		val controller = PlayerController()
@@ -67,6 +75,49 @@ class DhabenskyActivity : AppCompatActivity() {
 
 		scene.addObject(createDeathCollider())
 		scene.addObject(DeathListener())
+	}
+
+
+	private fun createBlocks(): List<SpriteObject> {
+		val blocks = arrayListOf<SpriteObject>()
+		val gen = GenerateBlock()
+		for (i in 0..30) {
+			val b = gen.createBlock(1800)
+			blocks.add(b)
+		}
+		return blocks
+	}
+
+	private fun createCollectable(index: Int, x: Float, y: Float): GameObject {
+		val obj = CollectableObject()
+		obj.drawable = resources.getDrawable(drawables.ids[index])
+		obj.w = 150
+		obj.h = 180
+		obj.pos.set(x - obj.w / 2, y - obj.h / 2)
+		return obj
+	}
+
+	object drawables {
+		val ids = arrayOf(
+				R.drawable.z_1,
+				R.drawable.z_2,
+				R.drawable.z_3,
+				R.drawable.z_4,
+				R.drawable.z_5,
+				R.drawable.z_6,
+				R.drawable.z_7,
+				R.drawable.z_8,
+				R.drawable.z_9,
+				R.drawable.z_10,
+				R.drawable.z_11,
+				R.drawable.z_12,
+				R.drawable.z_13,
+				R.drawable.z_14,
+				R.drawable.z_15,
+				R.drawable.z_16,
+				R.drawable.z_17,
+				R.drawable.z_18
+		)
 	}
 
 	private fun createPlayerFrames(): List<AnimationFrame> {

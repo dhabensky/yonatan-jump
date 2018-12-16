@@ -21,6 +21,8 @@ class Scene {
 
 	public var gameOver = false
 
+	private val objToRemove = arrayListOf<GameObject>()
+
 	fun render(canvas: Canvas) {
 
 		val curMillis = System.currentTimeMillis()
@@ -43,6 +45,10 @@ class Scene {
 			obj.render(canvas)
 		}
 
+		for (obj in objToRemove) {
+			objects.remove(obj)
+		}
+		objToRemove.clear()
 	}
 
 	private fun processCollisions(delta: Float) {
@@ -98,7 +104,7 @@ class Scene {
 	}
 
 	private fun processCollectableCollision(obj: GameObject) {
-		objects.remove(obj)
+		objToRemove.add(obj)
 	}
 
 	private fun processDeathCollision(obj: GameObject) {
