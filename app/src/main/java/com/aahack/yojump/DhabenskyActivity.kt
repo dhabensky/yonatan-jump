@@ -81,11 +81,11 @@ class DhabenskyActivity : AppCompatActivity() {
 		val player = Player()
 		player.jumpVelocity = 1000
 		player.frames = createPlayerFrames()
-		player.pos.set(100f, 500f)
-		player.acceleration.y = 500f
-		player.w = 100
-		player.h = 100
-		player.velocity.set(400f, -30f)
+		player.pos.set(100f, 400f)
+		player.acceleration.y = 2000f
+		player.w = 200
+		player.h = 200
+		player.velocity.set(600f, 0f)
 		player.jumpSound = MediaPlayer.create(this, R.raw.jump)
 		player.jumpSound.setVolume(1f, 1f)
 		return player
