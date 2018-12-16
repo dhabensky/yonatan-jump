@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import com.aahack.yojump.R;
 
 import com.aahack.yojump.util.AnimationFrame;
 
@@ -72,8 +71,12 @@ public class Player extends GameObject {
 
 	@Override
 	public void getBounds(@NotNull RectF outRect) {
-		float l = getPos().x;
-		float t = getPos().y;
+		float w = this.w * 0.6f;
+		float h = this.h * 0.9f;
+		float horOffset = (this.w - w) / 2;
+		float vertOffset = (this.h - h) / 2;
+		float l = getPos().x + horOffset;
+		float t = getPos().y + vertOffset;
 		outRect.set(l, t, l + w, t + h);
 	}
 
