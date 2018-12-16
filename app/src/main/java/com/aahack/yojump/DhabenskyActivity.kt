@@ -46,20 +46,18 @@ class DhabenskyActivity : AppCompatActivity() {
 
 		val player = createPlayer()
 		val camera = createCamera(screenSize)
-		val block = createBlock()
 		val background = createBackground(screenSize)
 
 
 		scene.addObject(background)
 		scene.setPlayer(player)
 		scene.setCamera(camera)
-		scene.addObject(block)
 
 		val blocks = createBlocks()
 		val rand = Random()
 		for (b in blocks) {
 			scene.addObject(b)
-			if (rand.nextInt(5) < 1) {
+			if (rand.nextInt(10) < 1) {
 				scene.addObject(createCollectable(
 						rand.nextInt(drawables.ids.size),
 						b.pos.x + b.w / 2,
@@ -149,16 +147,6 @@ class DhabenskyActivity : AppCompatActivity() {
 		camera.velocity.x = 600f
 		camera.scale = screenSize.y / HEIGHT
 		return camera
-	}
-
-	private fun createBlock(): Block {
-		val block = Block()
-		block.drawable = ColorDrawable(Color.BLACK)
-		block.w = 1800
-		block.h = 20
-		block.pos.set(0f, 600f)
-		block.tag = "block"
-		return block
 	}
 
 	private fun createBackground(point: Point): Background {

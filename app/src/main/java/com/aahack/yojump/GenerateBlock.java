@@ -20,29 +20,31 @@ public class GenerateBlock {
     private Random rand = new Random();
     private int screenH = getScreenHeight();
 
-    int endOfFirstBlock;
+    int endOfFirstBlock = 1800;
 
     public Block createBlock(int endOfFirstBlock){
         this.endOfFirstBlock = endOfFirstBlock;
         Block block = new Block();
         int blockW = randomNum(jonW*2, maxW);
-        block.setW(blockW);
+
         block.setH(20);
         //нет метода, передающего цвет. Зачем кадлый раз передавать цвет, если все плашки будут черными?
         block.setDrawable(new ColorDrawable(Color.BLACK));
         block.setTag("block");
         if(lastX == 0 && lastY == 0) {
-            int y = randomNum(0, screenH);
+            blockW = 1800;
+            int y = 750;
             block.getPos().set(0, y);
-            lastX = blockW + endOfFirstBlock;
+            lastX = endOfFirstBlock;
             lastY = y;
         } else {
             int x = randomNum(lastX, lastX + maxJumpW);
             int y = randomNum(lastY - maxJumpH, screenH);
-            block.getPos().set(x, y);
+            block.getPos().set(x + 100, y);
             lastX = x + blockW;
             lastY = y;
         }
+        block.setW(blockW);
         return block;
     }
 
