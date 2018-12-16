@@ -17,7 +17,7 @@ class Block(
 
 	fun scheduleDescruct() {
 		if (destructTime == 0L) {
-			destructTime = System.currentTimeMillis() + 200
+			destructTime = System.currentTimeMillis() + 400
 		}
 	}
 

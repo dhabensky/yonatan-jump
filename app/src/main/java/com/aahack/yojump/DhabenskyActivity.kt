@@ -1,5 +1,6 @@
 package com.aahack.yojump
 
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.RectF
@@ -31,6 +32,37 @@ class DhabenskyActivity : AppCompatActivity() {
 	companion object {
 		const val WIDTH = 1920f
 		const val HEIGHT = 1080f
+
+		fun createCollectable(resources: Resources, index: Int, x: Float, y: Float): GameObject {
+			val obj = CollectableObject()
+			obj.drawable = resources.getDrawable(ids[index])
+			obj.w = 150
+			obj.h = 180
+			obj.pos.set(x - obj.w / 2, y - obj.h / 2)
+			return obj
+		}
+
+		val ids = arrayOf(
+				R.drawable.z_1,
+				R.drawable.z_2,
+				R.drawable.z_3,
+				R.drawable.z_4,
+				R.drawable.z_5,
+				R.drawable.z_6,
+				R.drawable.z_7,
+				R.drawable.z_8,
+				R.drawable.z_9,
+				R.drawable.z_10,
+				R.drawable.z_11,
+				R.drawable.z_12,
+				R.drawable.z_13,
+				R.drawable.z_14,
+				R.drawable.z_15,
+				R.drawable.z_16,
+				R.drawable.z_17,
+				R.drawable.z_18
+		)
+
 	}
 
 	private lateinit var backgroundMusic: MediaPlayer
@@ -49,6 +81,7 @@ class DhabenskyActivity : AppCompatActivity() {
 
 		gameView.scene = scene
 		gen.scene = scene
+		gen.resources = resources
 
 		val player = createPlayer()
 		val camera = createCamera(screenSize)
@@ -63,9 +96,10 @@ class DhabenskyActivity : AppCompatActivity() {
 		val rand = Random()
 		for (b in blocks) {
 			scene.addObject(b)
-			if (rand.nextInt(10) < 1) {
-				scene.addObject(createCollectable(
-						rand.nextInt(drawables.ids.size),
+			if (rand.nextInt(2) < 1) {
+				scene.delayedAddObject(createCollectable(
+						resources,
+						rand.nextInt(ids.size),
 						b.pos.x + b.w / 2,
 						b.pos.y - b.h
 				))
@@ -119,38 +153,6 @@ class DhabenskyActivity : AppCompatActivity() {
 			blocks.add(b)
 		}
 		return blocks
-	}
-
-	private fun createCollectable(index: Int, x: Float, y: Float): GameObject {
-		val obj = CollectableObject()
-		obj.drawable = resources.getDrawable(drawables.ids[index])
-		obj.w = 150
-		obj.h = 180
-		obj.pos.set(x - obj.w / 2, y - obj.h / 2)
-		return obj
-	}
-
-	object drawables {
-		val ids = arrayOf(
-				R.drawable.z_1,
-				R.drawable.z_2,
-				R.drawable.z_3,
-				R.drawable.z_4,
-				R.drawable.z_5,
-				R.drawable.z_6,
-				R.drawable.z_7,
-				R.drawable.z_8,
-				R.drawable.z_9,
-				R.drawable.z_10,
-				R.drawable.z_11,
-				R.drawable.z_12,
-				R.drawable.z_13,
-				R.drawable.z_14,
-				R.drawable.z_15,
-				R.drawable.z_16,
-				R.drawable.z_17,
-				R.drawable.z_18
-		)
 	}
 
 	private fun createPlayerFrames(): List<AnimationFrame> {

@@ -5,12 +5,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
 import com.aahack.yojump.gameobject.Block;
-import com.aahack.yojump.gameobject.Player;
 import com.aahack.yojump.gameobject.Scene;
 
 import java.util.Random;
 
 public class GenerateBlock {
+    public Resources resources;
     public Scene scene;
     int bound = 200;
     int lastX;
@@ -53,6 +53,16 @@ public class GenerateBlock {
             block.setDestructible(true);
         }
         block.setW(blockW);
+
+        if (rand.nextInt(6) < 1) {
+            scene.delayedAddObject(DhabenskyActivity.Companion.createCollectable(
+                    resources,
+                    rand.nextInt(DhabenskyActivity.Companion.getIds().length),
+                    block.getPos().x + block.getW() / 2,
+                    block.getPos().y - block.getH()
+            ));
+        }
+
         return block;
     }
 
@@ -63,4 +73,5 @@ public class GenerateBlock {
     private int randomNum(int min, int max) {
         return rand.nextInt((max - min) + 1) + min;
     }
+
 }
