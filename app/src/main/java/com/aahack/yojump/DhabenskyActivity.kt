@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
@@ -85,6 +86,8 @@ class DhabenskyActivity : AppCompatActivity() {
 		player.w = 100
 		player.h = 100
 		player.velocity.set(400f, -30f)
+		player.jumpSound = MediaPlayer.create(this, R.raw.jump)
+		player.jumpSound.setVolume(1f, 1f)
 		return player
 	}
 

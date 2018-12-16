@@ -3,6 +3,8 @@ package com.aahack.yojump.gameobject;
 import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import com.aahack.yojump.R;
 
 import com.aahack.yojump.util.AnimationFrame;
 
@@ -12,6 +14,7 @@ import java.util.List;
 
 public class Player extends GameObject {
 
+	public MediaPlayer jumpSound;
 	public List<AnimationFrame> frames;
 	private long frameStart = 0;
 	private int frameIndex = -1;
@@ -70,6 +73,9 @@ public class Player extends GameObject {
 		if (!jumping) {
 			jumping = true;
 			getVelocity().y = -400;
+			if (jumpSound != null) {
+				jumpSound.start();
+			}
 		}
 	}
 
