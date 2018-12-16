@@ -3,6 +3,7 @@ package com.aahack.yojump
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.RectF
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -75,7 +76,13 @@ class DhabenskyActivity : AppCompatActivity() {
 		scene.addObject(createDeathCollider())
 		scene.addObject(DeathListener())
 
-		scene.setScore(ScoreLabel(player).apply { velocity.x = 600f; pos.set(1200f, 100f) })
+
+		val tf = Typeface.createFromAsset(assets, "font/komika-title.otf")
+		val score = ScoreLabel(player, tf).apply {
+			velocity.x = 600f;
+			pos.set(1200f, 100f)
+		}
+		scene.setScore(score)
 
 		backgroundMusic = MediaPlayer.create(this, R.raw.background)
 		backgroundMusic.setVolume(0.5f, 0.5f)

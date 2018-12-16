@@ -4,13 +4,17 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
+import android.graphics.Typeface
+
+
 
 /**
  * Created on 16.12.2018.
  * @author dhabensky <dhabensky@yandex.ru>
  */
 class ScoreLabel(
-		private val player: Player
+		private val player: Player,
+		private val typeface: Typeface
 ) : GameObject() {
 
 	private val paint: Paint
@@ -21,7 +25,8 @@ class ScoreLabel(
 	init {
 		paint = Paint(Paint.ANTI_ALIAS_FLAG)
 		paint.color = Color.RED
-		paint.textSize = 24 * 2f
+		paint.textSize = 76f
+		paint.typeface = typeface
 	}
 
 	override fun render(canvas: Canvas) {
@@ -31,7 +36,7 @@ class ScoreLabel(
 
 		val t = when (player.score == lastScore) {
 			true -> text!!
-			false -> "score: ${player.score}"
+			false -> "${player.score}"
 		}
 		text = t
 
