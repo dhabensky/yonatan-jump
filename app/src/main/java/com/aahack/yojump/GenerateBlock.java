@@ -38,9 +38,10 @@ public class GenerateBlock {
             lastX = endOfFirstBlock;
             lastY = y;
         } else {
-            int x = randomNum(lastX, lastX + maxJumpW);
+            int x = randomNum(lastX + 200, lastX + maxJumpW + 400);
             int y = randomNum(lastY - maxJumpH, screenH);
-            block.getPos().set(x + 100, y);
+            if(y < 300) y = 300;
+            block.getPos().set(x, y);
             lastX = x + blockW;
             lastY = y;
         }
