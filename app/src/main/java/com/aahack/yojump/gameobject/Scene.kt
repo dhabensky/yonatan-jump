@@ -104,6 +104,7 @@ class Scene {
 	}
 
 	private fun processCollectableCollision(obj: GameObject) {
+		player.collect()
 		objToRemove.add(obj)
 	}
 

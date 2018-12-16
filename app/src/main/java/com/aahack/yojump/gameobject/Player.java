@@ -14,6 +14,7 @@ import java.util.List;
 public class Player extends GameObject {
 
 	public MediaPlayer jumpSound;
+	public MediaPlayer collectSound;
 	public List<AnimationFrame> frames;
 	private long frameStart = 0;
 	private int frameIndex = -1;
@@ -87,6 +88,12 @@ public class Player extends GameObject {
 			if (jumpSound != null) {
 				jumpSound.start();
 			}
+		}
+	}
+
+	public void collect() {
+		if (collectSound != null) {
+			collectSound.start();
 		}
 	}
 

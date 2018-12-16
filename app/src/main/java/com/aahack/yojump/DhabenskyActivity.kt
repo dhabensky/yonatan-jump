@@ -139,6 +139,8 @@ class DhabenskyActivity : AppCompatActivity() {
 		player.velocity.set(600f, 0f)
 		player.jumpSound = MediaPlayer.create(this, R.raw.jump)
 		player.jumpSound.setVolume(1f, 1f)
+		player.collectSound = MediaPlayer.create(this, R.raw.applause)
+		player.collectSound.setVolume(1f, 1f)
 		return player
 	}
 
