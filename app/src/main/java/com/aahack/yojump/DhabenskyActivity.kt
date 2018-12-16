@@ -97,6 +97,7 @@ class DhabenskyActivity : AppCompatActivity() {
 
 	override fun onResume() {
 		super.onResume()
+		scene.lastFrameMillis = System.currentTimeMillis()
 		backgroundMusic.start()
 	}
 

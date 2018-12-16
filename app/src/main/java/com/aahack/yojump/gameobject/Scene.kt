@@ -17,7 +17,7 @@ class Scene {
 	private lateinit var player: Player
 	private lateinit var score: ScoreLabel
 
-	private var lastFrameMillis: Long = 0L
+	var lastFrameMillis: Long = 0L
 
 	private val playerBounds = RectF()
 	private val playerBoundsCopy = RectF()
