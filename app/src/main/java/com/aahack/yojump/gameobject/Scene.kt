@@ -12,7 +12,7 @@ import java.util.*
  */
 class Scene {
 
-	private val objects = arrayListOf<GameObject>()
+	private val objects = LinkedList<GameObject>()
 	private lateinit var camera: Camera
 	private lateinit var player: Player
 	private lateinit var score: ScoreLabel
@@ -26,6 +26,7 @@ class Scene {
 	public var gameOver = false
 
 	private val objToRemove = arrayListOf<GameObject>()
+	private val objToAdd = arrayListOf<GameObject>()
 
 	fun render(canvas: Canvas) {
 
@@ -54,7 +55,22 @@ class Scene {
 		}
 		objToRemove.clear()
 
+		for (obj in objToAdd) {
+			objects.add(obj)
+		}
+		objToAdd.clear()
+
 		score.render(canvas)
+
+		val iter = objects.iterator()
+		while (iter.hasNext()) {
+			val obj = iter.next()
+			if (obj.tag == "death") continue
+			if (obj.pos.x < camera.pos.x - 3000f) {
+				iter.remove()
+				Log.d("GENERATION", "pop object")
+			}
+		}
 	}
 
 	private fun processCollisions(delta: Float) {
@@ -157,6 +173,10 @@ class Scene {
 
 	fun getScore(): String? {
 		return score.getScore()
+	}
+
+	fun delayedAddObject(obj: GameObject) {
+		objToAdd.add(obj)
 	}
 
 }

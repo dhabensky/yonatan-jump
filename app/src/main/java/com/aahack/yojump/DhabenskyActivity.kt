@@ -9,6 +9,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Display
 import android.view.Window
 import android.view.WindowManager
@@ -25,6 +26,7 @@ import java.util.*
 class DhabenskyActivity : AppCompatActivity() {
 
 	private var scene = Scene()
+	private val gen = GenerateBlock()
 
 	companion object {
 		const val WIDTH = 1920f
@@ -84,6 +86,8 @@ class DhabenskyActivity : AppCompatActivity() {
 		}
 		scene.setScore(score)
 
+		scene.addObject(LevelGenerator(camera, gen, scene))
+
 		backgroundMusic = MediaPlayer.create(this, R.raw.background)
 		backgroundMusic.setVolume(0.5f, 0.5f)
 		backgroundMusic.isLooping = true
@@ -109,8 +113,7 @@ class DhabenskyActivity : AppCompatActivity() {
 
 	private fun createBlocks(): List<SpriteObject> {
 		val blocks = arrayListOf<SpriteObject>()
-		val gen = GenerateBlock()
-		for (i in 0..30) {
+		for (i in 0..3) {
 			val b = gen.createBlock()
 			blocks.add(b)
 		}
@@ -204,6 +207,10 @@ class DhabenskyActivity : AppCompatActivity() {
 	}
 
 	private inner class DeathListener : GameObject() {
+
+		init {
+			tag = "death"
+		}
 		private var fired = false
 		override fun update(delta: Float) {
 			super.update(delta)
@@ -222,6 +229,32 @@ class DhabenskyActivity : AppCompatActivity() {
 		override fun getBounds(outRect: RectF) {
 
 		}
+	}
+
+	private inner class LevelGenerator(
+			private val camera: Camera,
+			private val gen: GenerateBlock,
+			private val scene: Scene
+	) : GameObject() {
+
+		init {
+			tag = "death"
+		}
+
+		override fun update(delta: Float) {
+			super.update(delta)
+			if (gen.lastX - camera.pos.x < 2000) {
+				val prev = gen.lastX
+				val b = gen.createBlock()
+				scene.delayedAddObject(b)
+				Log.d("GENERATION", "prevLastX: $prev, lastX: ${gen.lastX}, camera: ${camera.pos}")
+			}
+		}
+
+		override fun getBounds(outRect: RectF) {
+
+		}
+
 	}
 
 }
