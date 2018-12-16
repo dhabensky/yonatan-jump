@@ -33,7 +33,7 @@ class Scene {
 			obj.update(delta)
 		}
 
-		processBlockCollisions()
+		processCollisions()
 
 		canvas.matrix = camera.getMatrix()
 
@@ -43,26 +43,38 @@ class Scene {
 
 	}
 
-	private fun processBlockCollisions() {
+	private fun processCollisions() {
 
-		val threshold = 16f
 		player.getBounds(playerBounds)
 
 		for (obj in objects) {
-			if (obj.tag != "block") continue
-
-			playerBoundsCopy.set(playerBounds)
-			obj.getBounds(bounds)
-
-			if (playerBoundsCopy.intersect(bounds)) {
-				val inside = playerBounds.bottom - bounds.top
-				if (player.velocity.y > 0 && inside < threshold) {
-					player.pos.y = bounds.top - player.h
-					player.velocity.y = 0f
-					player.isJumping = false
-				}
+			if (obj.tag == "block") {
+				processBlockCollision(obj)
+			}
+			else if (obj.tag == "collectable") {
+				processCollectableCollision(obj)
 			}
 		}
+	}
+
+	private fun processBlockCollision(obj: GameObject) {
+
+		val threshold = 16f
+		playerBoundsCopy.set(playerBounds)
+		obj.getBounds(bounds)
+
+		if (playerBoundsCopy.intersect(bounds)) {
+			val inside = playerBounds.bottom - bounds.top
+			if (player.velocity.y > 0 && inside < threshold) {
+				player.pos.y = bounds.top - player.h
+				player.velocity.y = 0f
+				player.isJumping = false
+			}
+		}
+	}
+
+	private fun processCollectableCollision(obj: GameObject) {
+		objects.remove(obj)
 	}
 
 	fun addObject(gameObject: GameObject) {

@@ -1,13 +1,13 @@
 package com.aahack.yojump.gameobject
 
 /**
- * Created on 15.12.2018.
+ * Created on 16.12.2018.
  * @author dhabensky <dhabensky@yandex.ru>
  */
-class Block : SpriteObject() {
+class CollectableObject : SpriteObject() {
 
 	init {
-		tag = "block"
+		tag = "collectable"
 	}
 
 }
