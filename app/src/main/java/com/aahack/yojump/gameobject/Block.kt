@@ -15,7 +15,7 @@ class Block(
 	private var destructTime = 0L
 	var destructible = false
 
-	fun scheduleDescruct() {
+	fun scheduleDestruct() {
 		if (destructTime == 0L) {
 			destructTime = System.currentTimeMillis() + 400
 		}

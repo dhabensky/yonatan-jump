@@ -42,19 +42,14 @@ class DhabenskyActivity : AppCompatActivity() {
 			return obj
 		}
 
-		fun createBurgers(resources: Resources, index: Int, x: Float, y: Float): GameObject {
+		fun createBurgers(resources: Resources, x: Float, y: Float): GameObject {
 			val obj = CollectableObject()
-			obj.drawable = resources.getDrawable(bIds[index])
+			obj.drawable = resources.getDrawable(R.drawable.burger)
 			obj.w = 70
 			obj.h = 60
 			obj.pos.set(x - obj.w / 2, y - obj.h / 2)
 			return obj
 		}
-
-		val bIds = arrayOf(
-				R.drawable.burger,
-				R.drawable.burger_another
-		)
 
 		val ids = arrayOf(
 				R.drawable.z_1,
@@ -118,12 +113,11 @@ class DhabenskyActivity : AppCompatActivity() {
 						b.pos.y - b.h
 				))
 			}
-			if(rand.nextInt(2)<1){
+			if (rand.nextInt(2) < 1) {
 				scene.delayedAddObject(createBurgers(
 						resources,
-						rand.nextInt(drawables.bIds.size),
-						b.pos.x  + b.w,
-						b.pos.y - b.h*2
+						b.pos.x + b.w,
+						b.pos.y - b.h * 2
 				))
 			}
 		}
@@ -136,9 +130,9 @@ class DhabenskyActivity : AppCompatActivity() {
 		scene.addObject(DeathListener())
 
 
-		val tf = Typeface.createFromAsset(assets, "font/komika-title.otf")
+		val tf = Typeface.createFromAsset(assets, "font/KomikaTitle-Axis.ttf")
 		val score = ScoreLabel(player, tf).apply {
-			velocity.x = 600f;
+			velocity.x = 600f
 			pos.set(1200f, 100f)
 		}
 		scene.setScore(score)
@@ -179,7 +173,7 @@ class DhabenskyActivity : AppCompatActivity() {
 
 	private fun createBurgers(index: Int, x: Float, y: Float): GameObject {
 		val obj = CollectableObject()
-		obj.drawable = resources.getDrawable(drawables.bIds[index])
+		obj.drawable = resources.getDrawable(R.drawable.burger)
 		obj.w = 70
 		obj.h = 60
 		obj.pos.set(x - obj.w / 2, y - obj.h / 2)
@@ -216,10 +210,6 @@ class DhabenskyActivity : AppCompatActivity() {
 				R.drawable.z_17,
 				R.drawable.z_18
 		)
-		val bIds = arrayOf(
-				R.drawable.burger,
-				R.drawable.burger_another
-		)
 	}
 
 	private fun createPlayerFrames(): List<AnimationFrame> {
@@ -242,7 +232,7 @@ class DhabenskyActivity : AppCompatActivity() {
 		player.velocity.set(600f, 0f)
 //		player.jumpSound = MediaPlayer.create(this, R.raw.jump)
 //		player.jumpSound.setVolume(1f, 1f)
-		player.collectSound = MediaPlayer.create(this, R.raw.jump_new_cut)
+		player.collectSound = MediaPlayer.create(this, R.raw.collect)
 		player.collectSound.setVolume(1f, 1f)
 		return player
 	}
@@ -281,6 +271,7 @@ class DhabenskyActivity : AppCompatActivity() {
 		init {
 			tag = "death"
 		}
+
 		private var fired = false
 		override fun update(delta: Float) {
 			super.update(delta)
@@ -289,7 +280,7 @@ class DhabenskyActivity : AppCompatActivity() {
 					fired = true
 					val resultScore = scene.getScore()
 					Handler().post {
-						intent = GameOverActivity.newIntent(resultScore,this@DhabenskyActivity)
+						intent = GameOverActivity.newIntent(resultScore, this@DhabenskyActivity)
 						startActivity(intent)
 					}
 				}

@@ -98,7 +98,7 @@ public class Player extends GameObject {
 
 	public void jump() {
 		if (jumpCount < maxJumps) {
-			jumpCount ++;
+			jumpCount++;
 			getVelocity().y = -jumpVelocity;
 			if (jumpSound != null) {
 				jumpSound.start();

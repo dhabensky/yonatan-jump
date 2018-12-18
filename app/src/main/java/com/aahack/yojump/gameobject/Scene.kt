@@ -131,7 +131,7 @@ class Scene {
 			player.resetJumpCount()
 
 			if (obj is Block && obj.destructible) {
-				obj.scheduleDescruct()
+				obj.scheduleDestruct()
 			}
 		}
 		else {
