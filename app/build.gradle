@@ -14,9 +14,23 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            def keystore = findProperty('yonatanStoreFile')
+            if (keystore) {
+                storeFile file(keystore)
+                storePassword  findProperty('yonatanStorePassword')
+                keyAlias       findProperty('yonatanKeyAlias')
+                keyPassword    findProperty('yonatanKeyPassword')
+            }
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
